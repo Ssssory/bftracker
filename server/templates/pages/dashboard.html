@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="col-lg-6">
+    <div class="card card-primary card-outline">
+        <div class="card-body">
+
+            <h3>Рестораны</h3>
+            {% if rests|length >= 1 %}
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Название</th>
+                                <th>Город</th>
+                                <th style="width: 100px">Создан</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key,item in rests %}
+                                <tr>
+                                    <td>{{key}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>
+                                        {{item.city}}
+                                    </td>
+                                    <td>{{item.created_at}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>Нет ресторанов</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="card card-primary card-outline">
+        <div class="card-body">
+
+            <h3>Точки</h3>
+
+            {% if points|length >= 1 %}
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Название</th>
+                            <th>Название ресторана</th>
+                            <th style="width: 100px">Создан</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key,item in points %}
+                        <tr>
+                            <td>{{key}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                {{item.restaurant.name}}
+                            </td>
+                            <td>{{item.created_at}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <p>Нет точек</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="card card-primary card-outline">
+        <div class="card-body">
+
+            <h3>Заказы</h3>
+            <p>Количество заказов в системе: {{orders}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="card card-primary card-outline">
+        <div class="card-body">
+
+            <h3>Стусы</h3>
+            <p>Количество клиентов в системе: {{clients}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
