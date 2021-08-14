@@ -13,7 +13,7 @@ class Restaurant(models.Model):
     closed_at = models.DateTimeField(blank=True)
 
 class Point(models.Model):
-    restaurant = models.ForeignKey(Restaurant,related_name="point")
+    restaurant = models.ForeignKey(Restaurant, related_name="point", on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     login = models.CharField(max_length=30, unique=True)
@@ -31,30 +31,30 @@ class Client(models.Model):
 class Order(models.Model):
     external_id = models.CharField(max_length=50, blank=True)
     order_id = models.CharField(max_length=30)
-    client = models.ForeignKey(Client)
-    point = models.ForeignKey(Point)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    point = models.ForeignKey(Point, on_delete=models.CASCADE)
     status_id = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
 class OrderStatusesHistory(models.Model):
-    order = models.ForeignKey(Order,related_name="status_history")
+    order = models.ForeignKey(Order,related_name="status_history", on_delete=models.CASCADE)
     status_id = models.PositiveIntegerField()
     date_start = models.DateTimeField()
     duration = models.PositiveIntegerField()
 
 
 class NotificationText(models.Model):
-    point = models.ForeignKey(Point)
+    point = models.ForeignKey(Point, on_delete=models.CASCADE)
     message = models.TextField()
     type = models.PositiveIntegerField()
     active = models.BooleanField(default=True)
 
 class Notification(models.Model):
-    client = models.ForeignKey(Client, related_name="notifications")
-    order = models.ForeignKey(Order)
-    text = models.ForeignKey(NotificationText)
+    client = models.ForeignKey(Client, related_name="notifications", on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    text = models.ForeignKey(NotificationText, on_delete=models.CASCADE)
     date_send = models.DateTimeField()
 
 
