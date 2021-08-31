@@ -1,7 +1,6 @@
 from .models import Client, Order, Point, Restaurant
 from .forms import PointForm
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 
