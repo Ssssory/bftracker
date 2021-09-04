@@ -8,6 +8,9 @@ from django.shortcuts import render
 def test(request):
     return render(request,'pages/test.html')
 
+def index(request):
+    return render(request,'pages/landing.html')
+
 def dashboard(request):
     rests = Restaurant.objects.all()
     points = Point.objects.all()
