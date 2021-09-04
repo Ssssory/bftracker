@@ -137,7 +137,7 @@ def run(request):
         auth = ApiTimeToken.objects.filter(token=token)
         if auth.exists():
             point = auth[0].point
-            link = "http:t.me/botname"
+            link = "t.me/ZhduEduBot"
             status = "success"
             resp = {"link": link, "point": point.as_json()}
         else:
