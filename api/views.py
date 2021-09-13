@@ -82,7 +82,7 @@ def run(request):
             )
             newOrder.save()
             status = "success"
-            resp = {"order": newOrder.as_json(), "status": Status.NEW}
+            resp = {"order": newOrder.as_json()}
         else:
             errorText = "incorrect login or password"
 
