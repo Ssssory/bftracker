@@ -59,7 +59,7 @@ class Order(models.Model):
 
     def as_json(self):
         return dict(
-            id=self.pk,
+            # id=self.pk,
             order_id=self.order_id,
             external_id=self.external_id,
             status=self.status,
