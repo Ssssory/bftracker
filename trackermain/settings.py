@@ -136,4 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SALT = '123456'
 
-DATE_FORMAT = "%a %b %d %T %Z %Y"
+DATE_FORMAT = "%d.%m.%Y %H:%M"
