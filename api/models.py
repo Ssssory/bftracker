@@ -20,10 +20,8 @@ class ApiTimeToken(models.Model):
         yesteryday = today + timedelta(days=-1)
         raw = cls.objects.filter(point=point, created_at__gt=yesteryday)
         if raw.exists():
-            print("exist")
             return raw[0].token
         else:
-            print("not exist")
             # удалим все протухшие ключи
             cls.objects.filter(point=point).delete()
             # создадим новую запись
