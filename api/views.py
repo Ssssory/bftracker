@@ -14,16 +14,6 @@ from uuid import uuid4
 from django.utils import timezone
 from datetime import date, datetime, time, timedelta
 
-# Create your views here.
-
-
-def test(request):
-    status = "success"
-    if status == "success":
-        return JsonResponse(Answer.success("текст ошибки", 11))
-    else:
-        return JsonResponse(Answer.error("текст ошибки", 11))
-
 
 @csrf_exempt
 def run(request):
@@ -55,7 +45,7 @@ def run(request):
         password = params['password']
 
         point = Point.objects.get(login=login)
-        print(point.as_json())
+        #print(point.as_json())
         try:
             # проверяем корректность пароля
             if point.password == MD5PasswordHasher().encode(
@@ -86,7 +76,6 @@ def run(request):
         else:
             errorText = "incorrect login or password"
 
-        pass
     if reqMethod == "status":
         token = params['token']
         auth = ApiTimeToken.objects.filter(token=token)
@@ -103,6 +92,7 @@ def run(request):
                 errorText = "can not update order"
         else:
             errorText = "incorrect token"
+    
     if reqMethod == "list":
         token = params['token']
         auth = ApiTimeToken.objects.filter(token=token)
@@ -123,6 +113,7 @@ def run(request):
             status = "success"
         else:
             errorText = "incorrect token"
+    
     if reqMethod == "dictionary":
         token = params['token']
         auth = ApiTimeToken.objects.filter(token=token)
@@ -185,11 +176,6 @@ def run(request):
         print(type(rest) == "Restaurant")
 
         pass
-
-
-    
-
-
 
 
     # print(body.keys())
