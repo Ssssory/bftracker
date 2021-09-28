@@ -61,7 +61,7 @@ class Logic:
         )
         newOrder.save()
 
-        return {"order": newOrder.as_json()}
+        return newOrder.as_json()
 
     def link(self, request, auth):
         # принимаем только запросы методом POST
