@@ -78,8 +78,8 @@ class Logic:
         if request.method != 'POST':
             raise Exception('error HTTP method')
 
-        arBody = self.getparam(request, ['orderId', 'status'])
-        order = arBody['orderId']
+        arBody = self.getparam(request, ['order_id', 'status'])
+        order = arBody['order_id']
         status = arBody['status']
 
         order = Order.objects.get(order_id=order)
