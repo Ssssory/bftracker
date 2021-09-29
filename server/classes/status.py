@@ -6,6 +6,7 @@ class Status():
     CANCELED = "CANCELED"
     CANCELED_TIMEOUT = "CANCELED_TIMEOUT"
     TEST = "TEST"
+    CALL = "CALL"
     ARCHIVED = "ARCHIVED"
     def as_json(self):
         return dict(
@@ -16,4 +17,5 @@ class Status():
             CANCELED=self.CANCELED,
             CANCELED_TIMEOUT=self.CANCELED_TIMEOUT,
             TEST=self.TEST,
+            CALL=self.CALL,
             ARCHIVED=self.ARCHIVED)
