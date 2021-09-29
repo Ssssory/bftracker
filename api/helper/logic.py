@@ -86,7 +86,7 @@ class Logic:
         order.status = status
         order.save()
 
-        return {"orderId": order}
+        return order.as_json()
 
     def list(self, request, auth):
         # принимаем только запросы методом POST
