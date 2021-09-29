@@ -3,7 +3,7 @@ import collections
 from server.classes.status import Status
 from api.models import ApiTimeToken
 from django.conf import settings
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 
 from django.contrib.auth.hashers import MD5PasswordHasher
 from server.models import Order, Point
@@ -12,9 +12,11 @@ class Logic:
 
     def getHeaderAuth(self, request):
         token = request.headers.get('Authorization')
+        today = timezone.now()
+        yesteryday = today + timedelta(days=-1)
         if token is None:
             raise Exception('no token')
-        auth = ApiTimeToken.objects.filter(token=token)
+        auth = ApiTimeToken.objects.filter(token=token, created_at__gt=yesteryday)
         if auth.exists():
             return auth
         raise Exception('token timeout')
@@ -95,7 +97,7 @@ class Logic:
 
         today_min = datetime.combine(date.today(), time.min)
         today_max = datetime.combine(date.today(), time.max)
-        statuslist = list([Status.IN_PROGRESS, Status.READY, Status.NEW])
+        statuslist = list([Status.IN_PROGRESS, Status.READY, Status.NEW, Status.CALL])
         orders = Order.objects.filter(
             point=auth[0].point, status__in=statuslist, created_at__range=(today_min, today_max))
         if orders.exists():
