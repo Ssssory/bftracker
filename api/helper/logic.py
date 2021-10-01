@@ -12,11 +12,12 @@ class Logic:
 
     def getHeaderAuth(self, request):
         token = request.headers.get('Authorization')
-        today = timezone.now()
-        yesteryday = today + timedelta(days=-1)
+        # today = timezone.now()
+        # yesteryday = today + timedelta(days=-1)
         if token is None:
             raise Exception('no token')
-        auth = ApiTimeToken.objects.filter(token=token, created_at__gt=yesteryday)
+        auth = ApiTimeToken.objects.filter(token=token)
+        # auth = ApiTimeToken.objects.filter(token=token, created_at__gt=yesteryday)
         if auth.exists():
             return auth
         raise Exception('token timeout')
