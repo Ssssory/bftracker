@@ -1,5 +1,5 @@
 import os
-from trackermain.server.models import Client, Order, Point
+from server.models import Client, Order, Point
 from bot.helper.messages import Messages
 import telebot
 import base64
