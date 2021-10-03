@@ -54,15 +54,11 @@ class TelegramServise():
             self.startBot()
             self.bot.send_message(id, text)
 
-    def getParam(msg):
+    def getParam(self, msg):
         print('-------------')
-        print(msg)
         msg = msg.replace("/start ", "")
-        print(msg)
         msg += "=" * ((4 - len(msg) % 4) % 4)
-        print(msg)
         orderText = base64.b64decode(msg).decode('utf-8')
-        print(orderText)
         data = json.loads(orderText)
         print(orderText)
         print('-------------')
