@@ -30,7 +30,7 @@ class TelegramServise():
 
         point = Point.objects.get(pk=point_id)
         try:
-            order = Order.objects.filter(point=point, order_id=order_id)
+            order = Order.objects.filter(point=point, pk=order_id)
             client = Client.objects.filter(messenger_id=userId, messenger_type="telegram")
             if not client.exists():
                 client = Client()
@@ -41,6 +41,7 @@ class TelegramServise():
             order.save()
         except:
             print("error: order not fount")
+            self.send_message(userId, "Обнаружена проблема, пожалуйста, сообщите администратору")
             return
 
         text = Messages.default_start_text
