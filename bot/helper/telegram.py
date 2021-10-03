@@ -4,6 +4,7 @@ from bot.helper.messages import Messages
 import telebot
 import base64
 import json
+from django.conf import settings
 
 class TelegramServise():
     bot = None
@@ -13,10 +14,8 @@ class TelegramServise():
         
 
     def startBot(self):
-        key = os.getenv('APP_KEY')
-
         if(self.bot is None):
-            bot = telebot.TeleBot(key)
+            bot = telebot.TeleBot(settings.APP_KEY)
             self.bot = bot
     
     def start(self, message):
@@ -56,8 +55,15 @@ class TelegramServise():
             self.bot.send_message(id, text)
 
     def getParam(msg):
+        print('-------------')
+        print(msg)
         msg = msg.replace("/start ", "")
+        print(msg)
         msg += "=" * ((4 - len(msg) % 4) % 4)
+        print(msg)
         orderText = base64.b64decode(msg).decode('utf-8')
+        print(orderText)
         data = json.loads(orderText)
+        print(orderText)
+        print('-------------')
         return data

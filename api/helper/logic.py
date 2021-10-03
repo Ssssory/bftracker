@@ -72,7 +72,7 @@ class Logic:
             raise Exception('error HTTP method')
 
         point = auth[0].point
-        link = "https://t.me/ZhduEduBot?start="
+        link = settings.BOT_LINK
         return {"link": link, "point": point.as_json()}
 
     # TODO: прикрутить проверку на номер заказа по точке
