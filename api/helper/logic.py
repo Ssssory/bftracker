@@ -85,9 +85,9 @@ class Logic:
         order = arBody['order_id']
         status = arBody['status']
 
-        today = datetime.date.today()
+        today = date.today()
 
-        order = Order.objects.get(order_id=order, point=auth[0].point, date_created__gt=today)
+        order = Order.objects.get(order_id=order, point=auth[0].point, created_at__gt=today)
         order.status = status
         order.save()
 
