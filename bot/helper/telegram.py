@@ -39,7 +39,9 @@ class TelegramServise():
                 newClient.messenger_id = userId
                 newClient.messenger_type = "telegram"
                 newClient.save()
-            order.client = newClient
+                order.client = newClient
+            else:
+                order.client = client
             order.save()
         except Exception as e:
             print("error: order not fount")
