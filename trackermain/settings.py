@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from dotenv import load_dotenv
 import os
 from pathlib import Path
 
@@ -138,5 +138,7 @@ SALT = '123456'
 
 DATE_FORMAT = "%d.%m.%Y %H:%M"
 
+
+load_dotenv()
 APP_KEY = os.getenv('APP_KEY')
 BOT_LINK = os.getenv('TELEGRAMM_API_LINK_ANSWER')
