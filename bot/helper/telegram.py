@@ -32,7 +32,7 @@ class TelegramServise():
         point = Point.objects.get(pk=point_id)
         try:
             today = datetime.date.today()
-            order = Order.objects.filter(point=point, order_id=order_id, date_created__gt=today)
+            order = Order.objects.filter(point=point_id, order_id=order_id, date_created__gt=today)
             client = Client.objects.filter(messenger_id=userId, messenger_type="telegram")
             if not client.exists():
                 client = Client()
@@ -41,8 +41,9 @@ class TelegramServise():
                 client.save()
             order.client = client
             order.save()
-        except:
+        except Exception as e:
             print("error: order not fount")
+            print(str(e))
             self.send_message(userId, "Обнаружена проблема, пожалуйста, сообщите администратору")
             return
 
