@@ -1,3 +1,4 @@
+from datetime import datetime, date
 import os
 from server.models import Client, Order, Point
 from bot.helper.messages import Messages
@@ -30,17 +31,21 @@ class TelegramServise():
 
         point = Point.objects.get(pk=point_id)
         try:
-            order = Order.objects.filter(point=point, pk=order_id)
-            client = Client.objects.filter(messenger_id=userId, messenger_type="telegram")
-            if not client.exists():
-                client = Client()
-                client.messenger_id = userId
-                client.messenger_type = "telegram"
-                client.save()
-            order.client = client
+            today = date.today()
+            order = Order.objects.get(point=point_id, order_id=order_id, created_at__gt=today)
+            client = Client.objects.get(messenger_id=userId, messenger_type="telegram")
+            if not client:
+                newClient = Client()
+                newClient.messenger_id = userId
+                newClient.messenger_type = "telegram"
+                newClient.save()
+                order.client = newClient
+            else:
+                order.client = client
             order.save()
-        except:
+        except Exception as e:
             print("error: order not fount")
+            print(str(e))
             self.send_message(userId, "Обнаружена проблема, пожалуйста, сообщите администратору")
             return
 
