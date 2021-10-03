@@ -32,7 +32,7 @@ class TelegramServise():
         point = Point.objects.get(pk=point_id)
         try:
             today = date.today()
-            order = Order.objects.filter(point=point_id, order_id=order_id, date_created__gt=today)
+            order = Order.objects.filter(point=point_id, order_id=order_id, created_at__gt=today)
             client = Client.objects.filter(messenger_id=userId, messenger_type="telegram")
             if not client.exists():
                 client = Client()
