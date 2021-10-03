@@ -137,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SALT = '123456'
 
 DATE_FORMAT = "%d.%m.%Y %H:%M"
+
+APP_KEY = os.getenv('APP_KEY')
+BOT_LINK = os.getenv('TELEGRAMM_API_LINK_ANSWER')
