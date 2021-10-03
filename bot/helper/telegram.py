@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 import os
 from server.models import Client, Order, Point
 from bot.helper.messages import Messages
@@ -31,7 +31,7 @@ class TelegramServise():
 
         point = Point.objects.get(pk=point_id)
         try:
-            today = datetime.date.today()
+            today = date.today()
             order = Order.objects.filter(point=point_id, order_id=order_id, date_created__gt=today)
             client = Client.objects.filter(messenger_id=userId, messenger_type="telegram")
             if not client.exists():
