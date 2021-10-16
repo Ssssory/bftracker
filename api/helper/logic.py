@@ -7,6 +7,8 @@ from datetime import date, datetime, time, timedelta, timezone
 
 from django.contrib.auth.hashers import MD5PasswordHasher
 from server.models import Order, Point
+from bot.helper.telegram import TelegramServise
+from bot.helper.messages import Messages
 
 class Logic:
 
@@ -88,6 +90,11 @@ class Logic:
         today = date.today()
 
         order = Order.objects.get(order_id=order, point=auth[0].point, created_at__gt=today)
+        if status == Status.READY:
+            if order.client:
+                telegram = TelegramServise()
+                telegram.send_message(
+                    order.client, Messages.default_ready_text)
         order.status = status
         order.save()
 
