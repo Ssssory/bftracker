@@ -7,6 +7,8 @@ import base64
 import json
 from django.conf import settings
 
+from server.classes.status import Status
+
 class TelegramServise():
     bot = None
 
@@ -59,6 +61,13 @@ class TelegramServise():
         except:
             self.startBot()
             self.bot.send_message(id, text)
+
+    def send_status_message(self, client, status):
+        id = client.messenger_id
+        if status == Status.CALL:
+            self.send_message(id, Messages.default_call_text)
+        if status == Status.READY:
+            self.send_message(id, Messages.default_ready_text)
 
     def getParam(self, msg):
         print('-------------')
